@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "CSGO.exchange Auto click",
+  "author": "Arthur.Lee",
+  "version": "0.5",
+  "description": "Auto click",
+  "icons": {
+    "128": "action.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://csgo.exchange/"
+  ],
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "logic.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://csgo.exchange/*"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "js": [
+        "jquery.js",
+        "popup.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Auto click",
+    "default_icon": "action.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "logic.js"
+  ]
+}
