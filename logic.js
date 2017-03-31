@@ -29,10 +29,8 @@ function click_logic(node, config) {
 		click_logic(node.next(), config)
 	} else {
 		if (node.attr("data-rawext") > 1) {
-			setTimeout(function () {
-				$(".OptionRetrieve").click();
-			}, 50);
 			observer_widw.observe(target_widw, config);
+			$(".OptionRetrieve").click();
 		} else {
 			node.append("<div class='show-rawext'>" + node.attr("data-rawext").substr(0, 10) + "</div>");
 			click_logic(node.next(), config);

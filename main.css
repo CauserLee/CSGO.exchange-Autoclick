@@ -1,4 +1,10 @@
-body {
-    text-align       : center;
-    background-color : #c0c0c0;
+body{
+	text-align       : center;
+	background-color : #c0c0c0;
+}
+
+.details{
+	margin-top    : 3px;
+	margin-bottom : 3px;
+	font-weight   : 500;
 }
