@@ -37,6 +37,7 @@
     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
-    "logic.js"
+    "logic.js",
+    "addon.js"
   ]
 }
