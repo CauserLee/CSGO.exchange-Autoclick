@@ -5,7 +5,6 @@ $(document).ready(function () {
     $("head").append("<script src=" + logic + "></script>");
     $("head").append("<script src=" + addon + "></script>");
     $(".contentMain").before("<div id='showExterior' class='bar'><a href='#' onclick='active()'>显示磨损</a></div>");
-    $("#showExterior").one("click", active());
 });
 
 
