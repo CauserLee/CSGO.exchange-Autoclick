@@ -28,14 +28,17 @@ function clickLogic(node) {
 						currentNode.append("<div class='show-rawext'>success</div>");
 						window.clearInterval(IntervalHandler1);
 						clickLogic(node.next());
-					}, 300);
+					}, 200);
 				}
 			}, 500);
 		}
 	});
 	show(node); //show()函数用于强制触发本来与mouseenter事件绑定的ItemData函数
 	if (node.hasClass("Key") || node.hasClass("Sticker") || node.hasClass("Container") || node.hasClass("Tool") || node.hasClass("Graffiti") || node.hasClass("Collectible") || node.hasClass("Music") || node.hasClass("Stock")) {
-		clickLogic(node.next())
+		setTimeout(function () {
+			currentNode.detach();
+		}, 10);
+		clickLogic(node.next());
 	} else {
 		if (node.attr("data-rawext") > 1) {
 			observer_widw.observe(target_widw, configNodeAttributes);
@@ -46,7 +49,7 @@ function clickLogic(node) {
 					$(".btnCheck").click();
 					window.clearInterval(IntervalHandler2);
 				}
-			}, 700);
+			}, 600);
 		} else {
 			node.append("<div class='show-rawext'>" + node.attr("data-rawext").substr(0, 10) + "</div>");
 			clickLogic(node.next());
