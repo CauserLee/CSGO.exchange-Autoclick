@@ -9,6 +9,7 @@
   },
   "permissions": [
     "tabs",
+    "notifications",
     "http://csgo.exchange/"
   ],
   "background": {

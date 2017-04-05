@@ -9,6 +9,8 @@ function active() {
 	clickLogic(Node);
 }
 
+var reloadFlag = false;
+
 function clickLogic(node) {
 	//此处用于初始化DOM监听器
 	var configNodeAttributes = {attributes: true, childList: false, characterData: false};
@@ -27,7 +29,7 @@ function clickLogic(node) {
 						$("#bg-widw").css("display", "none");
 						currentNode.append("<div class='show-rawext'>success</div>");
 						window.clearInterval(IntervalHandler1);
-						clickLogic(node.next());
+						controller(node, reloadFlag);
 					}, 200);
 				}
 			}, 500);
@@ -36,11 +38,12 @@ function clickLogic(node) {
 	show(node); //show()函数用于强制触发本来与mouseenter事件绑定的ItemData函数
 	if (node.hasClass("Key") || node.hasClass("Sticker") || node.hasClass("Container") || node.hasClass("Tool") || node.hasClass("Graffiti") || node.hasClass("Collectible") || node.hasClass("Music") || node.hasClass("Stock")) {
 		setTimeout(function () {
-			currentNode.detach();
-		}, 10);
-		clickLogic(node.next());
+			currentNode.remove();
+		}, 20);
+		controller(node, reloadFlag);
 	} else {
 		if (node.attr("data-rawext") > 1) {
+			reloadFlag = true;
 			observer_widw.observe(target_widw, configNodeAttributes);
 			document.querySelector("a[href^='#item']").click();
 			var IntervalHandler2 = window.setInterval(function () { //此函数是用于在input中填充查询地址和点击check按钮的监听器
@@ -52,7 +55,23 @@ function clickLogic(node) {
 			}, 600);
 		} else {
 			node.append("<div class='show-rawext'>" + node.attr("data-rawext").substr(0, 10) + "</div>");
-			clickLogic(node.next());
+			controller(node, reloadFlag);
+		}
+	}
+}
+
+function controller(Node, reloadFlag) {
+	if (Node.next().hasClass("vItem")) {
+		clickLogic(Node.next());
+	} else {
+		if (reloadFlag === true) {
+			Notification.requestPermission(function () {
+				var n = new Notification("Need refresh");
+			});
+		} else {
+			Notification.requestPermission(function () {
+				var n = new Notification("Task Finished");
+			});
 		}
 	}
 }
