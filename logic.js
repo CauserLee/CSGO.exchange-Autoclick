@@ -14,17 +14,23 @@ function clickLogic(node) {
 	var configNodeAttributes = {attributes: true, childList: false, characterData: false};
 	var configSubtree = {attributes: true, childList: true, characterData: true, subtree: true};
 	var target_widw = document.querySelector("#widw");
+	var currentNode = node;
 	var observer_widw = new MutationObserver(function () { //此函数是用于点击关闭按钮的监听器
 		if ($("#widw").css("display") === "block") {
-			var IntervalHandler1 = self.setInterval(function () {
+			observer_widw.disconnect();
+			var IntervalHandler1 = window.setInterval(function () {
 				if ($(".msgNotif") !== null) {
+					$(".msgNotif").detach();
 					$(".widw-close").click();
-					document.querySelector("a[href='#']");
-					node.append("<div class='show-rawext'>success</div>");
-					clickLogic(node.next());
-					window.clearInterval(IntervalHandler1);
+					setTimeout(function () {
+						$("#widw").css("display", "none");
+						$("#bg-widw").css("display", "none");
+						currentNode.append("<div class='show-rawext'>success</div>");
+						window.clearInterval(IntervalHandler1);
+						clickLogic(node.next());
+					}, 300);
 				}
-			}, 700);
+			}, 500);
 		}
 	});
 	show(node); //show()函数用于强制触发本来与mouseenter事件绑定的ItemData函数
@@ -34,13 +40,11 @@ function clickLogic(node) {
 		if (node.attr("data-rawext") > 1) {
 			observer_widw.observe(target_widw, configNodeAttributes);
 			document.querySelector("a[href^='#item']").click();
-			var IntervalHandler2 = self.setInterval(function () { //此函数是用于在input中填充查询地址和点击check按钮的监听器
+			var IntervalHandler2 = window.setInterval(function () { //此函数是用于在input中填充查询地址和点击check按钮的监听器
 				if ($("#widw").css("display") === "block") {
-					setTimeout(function () {
-						$(".txtInspect").attr("value", $(".OptionInspect").attr("href"));
-						$(".btnCheck").click();
-						window.clearInterval(IntervalHandler2);
-					}, 300);
+					$(".txtInspect").attr("value", $(".OptionInspect").attr("href"));
+					$(".btnCheck").click();
+					window.clearInterval(IntervalHandler2);
 				}
 			}, 700);
 		} else {
