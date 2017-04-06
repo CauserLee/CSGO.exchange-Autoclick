@@ -4,7 +4,7 @@
 
  ===========================*/
 $(document).ready(function () {
-	if (sessionStorage.AutoclickRefreshCount) {
+	if (sessionStorage.AutoclickRefreshCount && Number(sessionStorage.AutoclickRefreshCount) > 0) {
 		if (Number(sessionStorage.AutoclickRefreshCount) < 4) {
 			var handler = window.setInterval(function () {
 				if ($(".statsInv").text() !== "") {
