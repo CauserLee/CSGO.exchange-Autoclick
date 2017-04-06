@@ -3,6 +3,9 @@
  本js文件用于存放脚本点击逻辑
 
  ===========================*/
+$(document).ready(function () {
+    $("#showExterior").one("click", active());
+});
 
 function active() {
 	var Node = $(".vItem.Normal.cItem:first");
