@@ -3,10 +3,41 @@
  本js文件用于存放脚本点击逻辑
 
  ===========================*/
+$(document).ready(function () {
+	if (sessionStorage.AutoclickRefreshCount) {
+		if (Number(sessionStorage.AutoclickRefreshCount) < 4) {
+			var handler = window.setInterval(function () {
+				if ($(".statsInv").text() !== "") {
+					var Node = $(".vItem.Normal.cItem:first");
+					window.clearInterval(handler);
+					clickLogic(Node);
+				}
+			}, 50);
+		} else {
+			var handler = window.setInterval(function () {
+				if ($(".statsInv").text() !== "") {
+					finishedFlag = true;
+					Notification.requestPermission(function () {
+						var n = new Notification("Task Finished");
+					});
+					var Node = $(".vItem.Normal.cItem:first");
+					window.clearInterval(handler);
+					clickLogic(Node);
+				}
+			}, 50);
+		}
+	} else {
+		sessionStorage.AutoclickRefreshCount = 0;
+	}
+});
+
 var onceFlag = true;
+var finishedFlag = false;
 
 function active() {
-	if (onceFlag){
+	finishedFlag = false;
+	sessionStorage.AutoclickRefreshCount = 0;
+	if (onceFlag) {
 		onceFlag = false;
 		var Node = $(".vItem.Normal.cItem:first");
 		clickLogic(Node);
@@ -68,14 +99,16 @@ function controller(Node, reloadFlag) {
 	if (Node.next().hasClass("vItem")) {
 		clickLogic(Node.next());
 	} else {
-		if (reloadFlag === true) {
-			Notification.requestPermission(function () {
-				var n = new Notification("Need refresh");
-			});
+		if (reloadFlag === true && Number(sessionStorage.AutoclickRefreshCount) < 4) {
+			sessionStorage.AutoclickRefreshCount = Number(sessionStorage.AutoclickRefreshCount) + 1;
+			location.reload(true);
 		} else {
-			Notification.requestPermission(function () {
-				var n = new Notification("Task Finished");
-			});
+			if (finishedFlag) {
+			} else {
+				Notification.requestPermission(function () {
+					var n = new Notification("Task Finished");
+				});
+			}
 		}
 	}
 }
