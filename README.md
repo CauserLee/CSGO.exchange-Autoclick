@@ -1,7 +1,7 @@
 # CSGO.exchange-Autoclick
 
 > <p>CSGO.exchange-Autoclick是用于在csgo.exchange上进行自动磨损查询的Chrome插件</p>
-> <p>CSGO.exchange-Autoclick is a Chrome extension for retrieving CS:GO skins' float exterior automatically.</p>
+> <p>CSGO.exchange-Autoclick is a Chrome extension for retrieving CS:GO skins' float exteriors automatically.</p>
 
 ### 使用步骤：
 
