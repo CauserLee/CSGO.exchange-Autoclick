@@ -105,6 +105,7 @@ function controller(Node, reloadFlag) {
 		} else {
 			if (finishedFlag) {
 			} else {
+				onceFlag = false;
 				Notification.requestPermission(function () {
 					var n = new Notification("Task Finished");
 				});
