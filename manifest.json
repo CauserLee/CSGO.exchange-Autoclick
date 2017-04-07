@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "CSGO.exchange Auto click",
   "author": "Arthur.Lee",
-  "version": "0.9",
+  "version": "2.0",
   "description": "Auto click",
   "icons": {
     "128": "action.png"
