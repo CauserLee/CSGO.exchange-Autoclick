@@ -3,19 +3,17 @@
  本js文件用于存放脚本点击逻辑
 
  ===========================*/
-var onceFlag = true;
-var reloadFlag = false;
-var finishedFlag = false;
+let [onceFlag, reloadFlag, finishedFlag] = [true, false, false];
 //以上为Flag变量
-var $widw = $("#widw");
-var $bgwidw = $("#bg-widw");
-var $retrieve = document.querySelector("a[href='#item/market']");
-var inspectCache = "";
-var target_widw = document.querySelector("#widw");
+const $widw = $("#widw");
+const $bgwidw = $("#bg-widw");
+const $retrieve = document.querySelector("a[href='#item/market']");
+const target_widw = document.querySelector("#widw");
+let inspectCache = "";
 //以上为对象缓存
-var configSubtree = {attributes: true, childList: true, characterData: false, subtree: true};
+const configSubtree = {attributes: true, childList: true, characterData: false, subtree: true};
 //以上为Config对象
-var observerCheck = new MutationObserver(function () { //查询地址填充与check按钮点击监听器
+let observerCheck = new MutationObserver(function () { //查询地址填充与check按钮点击监听器
 	if ($widw.css("display") === "block") {
 		observerCheck.disconnect();
 		$(".txtInspect").attr("value", inspectCache);
@@ -27,18 +25,20 @@ var observerCheck = new MutationObserver(function () { //查询地址填充与ch
 $(document).ready(function () {
 	if (sessionStorage.AutoclickRefreshCount && Number(sessionStorage.AutoclickRefreshCount) > 0) {
 		if (Number(sessionStorage.AutoclickRefreshCount) < 4) {
-			var handler = window.setInterval(function () {
+			let handler = window.setInterval(function () {
 				if ($(".statsInv").text() !== "") {
 					window.clearInterval(handler);
 					clickLogic($(".vItem.cItem:first"));
 				}
 			}, 50);
+		} else if (sessionStorage.AutoclickRefreshCount === 5) {
+			onceFlag = false;
 		} else {
-			var handler = window.setInterval(function () {
+			let handler = window.setInterval(function () {
 				if ($(".statsInv").text() !== "") {
 					finishedFlag = true;
 					Notification.requestPermission(function () {
-						var n = new Notification("Task Finished");
+						let n = new Notification("Task Finished");
 					});
 					window.clearInterval(handler);
 					clickLogic($(".vItem.cItem:first"));
@@ -60,14 +60,12 @@ function active() {
 }
 
 function clickLogic(node) {
-	var observerClose = new MutationObserver(function () { //关闭按钮点击监听器
+	let observerClose = new MutationObserver(function () { //关闭按钮点击监听器
 		if ($(".detailItem") !== null || $(".contentWeb") !== null) {
 			observerClose.disconnect();
 			$widw.css("display", "none");
 			$bgwidw.css("display", "none");
-			setTimeout(function (node) {
-				node.append("<div class='show-rawext'>" + node.attr("data-rawext").substr(0, 10) + "</div>");
-			}(node), 500);
+			node.append("<div class='show-rawext'>success</div>");
 			setTimeout(function () {
 				controller(node, reloadFlag);
 			}, 1000);
@@ -104,7 +102,7 @@ function controller(node, reloadFlag) {
 				observerCheck.disconnect();
 				sessionStorage.AutoclickRefreshCount = 5;
 				Notification.requestPermission(function () {
-					var n = new Notification("Task Finished");
+					let n = new Notification("Task Finished");
 				});
 			}
 		}
@@ -116,7 +114,7 @@ function inspect(node) {
 }
 
 function parseInspect() {
-	var t = $(".txtInspect").val(),
+	let t = $(".txtInspect").val(),
 		e = /steam:\/\/rungame\/730\/\d*?\/\+csgo_econ_action_preview( |%20)(M|S)(\d*)[A](\d*)[D](\d*)/gm;
 	null !== (m = e.exec(t)) ? null != m[2] && null != m[3] && null != m[4] && null != m[5] ? ($("#MarketFloatValue").html("<img class='loading' src='/images/loader.gif' alt='loading...' />"), $("#MarketFloatValue").load("/item/float", {
 		s: m[2],
