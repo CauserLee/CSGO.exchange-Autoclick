@@ -11,7 +11,7 @@
 
 ### User Guide
 
-<p> Click the Retrieve button after login with your Steam account and the inventory you want to retrieve has already loaded,then the script will begin to retrieve float exterior automatically.The script may running a little slow coz the server cannot respond your requests so fast,but there will be a notification when the script finished</p>
+<p> Click the Retrieve button after login with your Steam account and the inventory you want to retrieve has already loaded,then the script will begin to retrieve float exterior automatically.The script may be a little slow coz the server cannot respond your requests so fast,but there will be a notification when the script finished</p>
 
 ### 已知问题
 
