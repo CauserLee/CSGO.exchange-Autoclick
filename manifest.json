@@ -33,7 +33,7 @@
     }
   ],
   "browser_action": {
-    "default_title": "Auto click",
+    "default_title": "Auto retrieve",
     "default_icon": "action.png",
     "default_popup": "popup.html"
   },
