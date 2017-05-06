@@ -79,7 +79,7 @@ function clickLogic(node) {//脚本主体
 		}
 	});
 	if (retrieveAllFlag === "true") {
-		if (node.hasClass("Key") || node.hasClass("Sticker") || node.hasClass("Container") || node.hasClass("Tool") || node.hasClass("Graffiti") || node.hasClass("Collectible") || node.hasClass("Music") || node.hasClass("Stock") || node.hasClass("Pass")) {
+		if (node.children().hasClass("Key") || node.children().hasClass("Sticker") || node.children().hasClass("Container") || node.children().hasClass("Tool") || node.children().hasClass("Graffiti") || node.children().hasClass("Collectible") || node.children().hasClass("Music") || node.children().hasClass("Stock") || node.children().hasClass("Pass")) {
 			node.hide();
 			nextController(node, reloadFlag);
 		} else {
@@ -95,7 +95,7 @@ function clickLogic(node) {//脚本主体
 			}
 		}
 	} else {
-		if (node.hasClass("Weapon") || node.hasClass("Key") || node.hasClass("Sticker") || node.hasClass("Container") || node.hasClass("Tool") || node.hasClass("Graffiti") || node.hasClass("Collectible") || node.hasClass("Music") || node.hasClass("Stock") || node.hasClass("Pass")) {
+		if (node.children().hasClass("Weapon") || node.children().hasClass("Key") || node.children().hasClass("Sticker") || node.children().hasClass("Container") || node.children().hasClass("Tool") || node.children().hasClass("Graffiti") || node.children().hasClass("Collectible") || node.children().hasClass("Music") || node.children().hasClass("Stock") || node.children().hasClass("Pass")) {
 			node.hide();
 			nextController(node, reloadFlag);
 		} else {
